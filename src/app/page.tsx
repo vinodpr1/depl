@@ -44,7 +44,7 @@ const BirthdayWish = ({ friendName = "Friend" }) => {
       
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all hover:scale-105 duration-300">
         <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-6 text-center">
-          <h1 className="text-4xl font-bold text-white mb-2">Happy Birthday!</h1>
+          <h1 className="text-4xl font-bold text-white mb-2">Happy Birthday beta!</h1>
           <p className="text-xl text-white opacity-90">🎉 {friendName} 🎂</p>
         </div>
         
