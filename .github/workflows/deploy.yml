@@ -23,3 +23,10 @@ jobs:
 
     - name: test file and foldr
       run: ls
+    
+     - name: Build application
+      run: npm run build
+    
+    - name: test file and foldr
+      run: ls
+    
