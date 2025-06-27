@@ -6,11 +6,11 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  AWS_EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
-  AWS_EC2_USER: ${{ secrets.AWS_EC2_USER }}
-  AWS_EC2_KEY: ${{ secrets.PRIVATE_KEY }}
-  REPO_URL: https://github.com/vinodpr1/depl.git
+# env:
+#   AWS_EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
+#   AWS_EC2_USER: ${{ secrets.AWS_EC2_USER }}
+#   AWS_EC2_KEY: ${{ secrets.PRIVATE_KEY }}
+#   REPO_URL: https://github.com/vinodpr1/depl.git
 
 jobs:
   build:
@@ -30,27 +30,6 @@ jobs:
     - name: Build application
       run: npm run build
 
-    deploy:
-      needs: build
-      runs-on: ubuntu-latest
-
-    steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-        name: build
-        
-    - name: Install SSH key
-       uses: shimataro/ssh-key-action@v2
-       with:
-         key: ${{ secrets.PRIVATE_KEY }}
-         known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-        
-    - name: Deploy to EC2
-      run: |
-        # Create directory structure
-        ssh -o StrictHostKeyChecking=no ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }} "mkdir -p ~/app/current"
-        
-        # Copy files to EC2
-        scp -o StrictHostKeyChecking=no -r .next public package.json package-lock.json next.config.js ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}:~/app/current/
-    
+    - name: List files and folders
+      run: ls -la
+      run: ls
