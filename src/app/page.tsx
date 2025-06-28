@@ -30,7 +30,7 @@ const BirthdayWish = () => {
         
         <div className="bg-pink-50 p-4 text-center border-t border-pink-100">
           <p className="text-sm text-pink-600">
-            Made with ❤️ for your special day!
+            Made with ❤️ for your special day!!!
           </p>
         </div>
       </div>
