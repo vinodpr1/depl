@@ -29,3 +29,33 @@ jobs:
     
     - name: test file and folder after build
       run: ls
+      
+deploy:
+  needs: build
+  runs-on: ubuntu-latest
+  
+  steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build.tar.gz
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          source: "build.tar.gz"
+          target: "/home/ubuntu/app"
+
+      - name: Extract files & restart server (via SSH)
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/app
+            tar -xzvf build.tar.gz
+            sudo systemctl restart my-node-app.service   # Adjust service name
