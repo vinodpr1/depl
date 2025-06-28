@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.AWS_EC2_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            cd /home/ubuntu/app
+            cd /home/ubuntu
 
       - name: Checkout the code
         uses: actions/checkout@v4
