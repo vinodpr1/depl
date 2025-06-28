@@ -21,12 +21,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: test file and foldr
+    - name: test file and folder before build
       run: ls
     
      - name: Build application
       run: npm run build
     
-    - name: test file and foldr
+    - name: test file and folder after build
       run: ls
     
