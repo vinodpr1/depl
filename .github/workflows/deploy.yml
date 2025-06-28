@@ -20,22 +20,5 @@ jobs:
           script: |
             cd /home/ubuntu/app
 
-            # If repo not cloned yet, clone it
-            if [ ! -d ".git" ]; then
-              git clone https://github.com/vinodpr1/depl.git .
-            else
-              git pull origin master
-            fi
-
-            # Install Node if not installed (optional)
-            if ! command -v node &> /dev/null; then
-              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-              sudo apt-get install -y nodejs
-            fi
-
-            # Install dependencies and build
-            npm install
-            npm run build
-
-            # Restart service (adjust the name)
-            sudo systemctl restart my-node-app.service
+      - name: Checkout the code
+        uses: actions/checkout@v4
