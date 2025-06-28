@@ -1,10 +1,10 @@
-name: CI/CD PipelineAdd commentMore actions
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -24,9 +24,8 @@ jobs:
     - name: test file and folder before build
       run: ls
     
-     - name: Build application
+    - name: Build application
       run: npm run build
     
     - name: test file and folder after build
       run: ls
-    
