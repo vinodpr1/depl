@@ -11,51 +11,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-    
-    - name: Install dependencies
-      run: npm install
-
-    - name: test file and folder before build
-      run: ls
-    
-    - name: Build application
-      run: npm run build
-    
-    - name: test file and folder after build
-      run: ls
+      - uses: actions/checkout@v2
       
-deploy:
-  needs: build
-    runs-on: ubuntu-latest
-  
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: test file and folder before build
+        run: ls
+      
+      - name: Build application
+        run: npm run build
+      
+      - name: test file and folder after build
+        run: ls
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest   # ✅ Corrected indentation
+
     steps:
-    - name: Download build artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: build.tar.gz
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build.tar.gz
 
-    - name: Deploy to EC2 via SSH
-      uses: appleboy/scp-action@v1
-      with:
-        host: ${{ secrets.AWS_EC2_HOST }}
-        username: ${{ secrets.AWS_EC2_USER }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        source: "build.tar.gz"
-        target: "/home/ubuntu/app"
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          source: "build.tar.gz"
+          target: "/home/ubuntu/app"
 
-    - name: Extract files & restart server (via SSH)
-      uses: appleboy/ssh-action@v1
-      with:
-        host: ${{ secrets.AWS_EC2_HOST }}
-        username: ${{ secrets.AWS_EC2_USER }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        script: |
-          cd /home/ubuntu/app
-          tar -xzvf build.tar.gz
-          sudo systemctl restart my-node-app.service   # Adjust service name
+      - name: Extract files & restart server (via SSH)
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/app
+            tar -xzvf build.tar.gz
+            sudo systemctl restart my-node-app.service   # Adjust service name
