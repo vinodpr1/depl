@@ -29,6 +29,4 @@ jobs:
             npm install
             npm run build
             ls
-            npm install -g pm2
-            pm2 --version
-            
+            nohup npm run dev > output.log 2>&1 &
