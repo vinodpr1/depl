@@ -17,9 +17,6 @@ jobs:
           host: ${{ secrets.AWS_EC2_HOST }}
           username: ${{ secrets.AWS_EC2_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
-        
-      - name: Check the files and folder
-        uses: ls
           
       - name: Checkout the code
         uses: actions/checkout@v4
