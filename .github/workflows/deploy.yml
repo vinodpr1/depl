@@ -25,8 +25,10 @@ jobs:
           script: |
             git clone https://github.com/vinodpr1/depl.git
             cd depl
+            ls
             npm install
             npm run build
+            ls
             npm install -g pm2
             pm2 start npm --name "my-app" -- run dev
             
