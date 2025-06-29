@@ -23,10 +23,14 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
+            sudo apt-get update
+            sudo apt-get install -y nodejs npm
+            sudo npm install -g pm2
             git clone https://github.com/vinodpr1/depl.git
             cd depl
             ls -la
             npm install
             npm run build
             ls
-            nohup npm run dev > output.log 2>&1 &
+            pm2 start npm --name "my-app" -- run dev
+            pm2 save
