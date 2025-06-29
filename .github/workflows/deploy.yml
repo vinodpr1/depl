@@ -29,5 +29,6 @@ jobs:
             cd depl
             npm install
             npm run build
-            npm run dev
+            npm install -g pm2
+            pm2 start npm --name "my-app" -- run dev
             
