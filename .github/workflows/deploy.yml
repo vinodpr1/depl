@@ -11,15 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.AWS_EC2_HOST }}
           username: ${{ secrets.AWS_EC2_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
-          
-      - name: Checkout the code
-        uses: actions/checkout@v4
-
-      - name: Check the file and folder
-        run: ls -la
+          script: |
+            cd /home/ec2-user/my-app
+            git pull origin master || git clone https://github.com/vinodpr1/repl.git
