@@ -31,6 +31,5 @@ jobs:
             npm install
             npm run build
             ls
-            pm2 restart my-app || pm2 start npm --name "my-app" -- start
-            pm2 start npm --name "my-app" -- run start
+            pm2 pm2 start npm --name "my-app" -- start
             pm2 save
