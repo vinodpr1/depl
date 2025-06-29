@@ -25,3 +25,5 @@ jobs:
           script: |
             cd depl || git clone https://github.com/vinodpr1/depl.git && cd depl
             ls
+            git pull origin master
+            ls
