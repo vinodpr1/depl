@@ -27,4 +27,6 @@ jobs:
             ls
             git pull origin master
             ls
+            nvm install 20
             npm install
+            npm run build
