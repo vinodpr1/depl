@@ -24,8 +24,4 @@ jobs:
           port: 22
           script: |
             cd depl || git clone https://github.com/vinodpr1/depl.git && cd depl
-            git pull origin master
-            npm install
-            npm run build
-            pm2 restart my-app || pm2 start npm --name "my-app" -- start
-            pm2 save
+            ls
