@@ -29,5 +29,4 @@ jobs:
             npm run build
             pm2 restart my-app || pm2 start npm --name "my-app" -- start
             pm2 save
-
  
