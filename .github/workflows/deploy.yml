@@ -27,4 +27,5 @@ jobs:
             ls
             git pull origin master
             ls
-            npm install
+            cd depl
+            ls
