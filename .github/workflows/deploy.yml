@@ -18,15 +18,19 @@ jobs:
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: 15.207.107.82
+          host: 43.205.214.42
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd depl || git clone https://github.com/vinodpr1/depl.git && cd depl
-            git pull origin master
+            sudo apt-get update
+            sudo npm install -g pm2
+            git clone https://github.com/vinodpr1/depl.git
+            cd depl
+            ls -la
             npm install
             npm run build
+            ls
             pm2 restart my-app || pm2 start npm --name "my-app" -- start
+            pm2 start npm --name "my-app" -- run start
             pm2 save
- 
