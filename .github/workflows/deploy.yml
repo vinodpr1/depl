@@ -25,3 +25,5 @@ jobs:
           script: |
             whoami
             ls
+            git clone https://github.com/vinodpr1/depl.git
+            
