@@ -21,7 +21,7 @@ const BirthdayWish = () => {
             Wishing you a day filled with happiness and a year filled with joy!
           </p>
           
-          <div className="animate-bounce text-4xl mb-4">🎈</div>
+          <div className="animate-bounce text-4xl mb-4">🎈 Test</div>
           
           <p className="text-gray-600 italic">
             May all your dreams and wishes come true this year!
